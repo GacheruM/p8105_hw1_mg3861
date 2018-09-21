@@ -99,6 +99,7 @@ mean(factor_character_numeric)
 ```
 
 
+
 ##Problem 2
 
 First step is to create a data frame comprised of: 
@@ -127,4 +128,14 @@ x_plus_y_factor = as.factor(x_plus_y_logical)
 head(random_sample_df)
 ```
 
+
 The data frame created above contains `r dim(random_sample_df)[1]` rows and `r dim(random_sample_df)[2]` columns. The random sample vector (x) has a  mean of `r mean(random_sample_df$x)` and a median of `r median(random_sample_df$x)` while the random sample vector (y) has a mean of `r mean(random_sample_df$y)` and median of `r mean(random_sample_df$y)`. Also, the proportion of the cases that have a summation of x and y that is greater than 0 is `r mean(random_sample_df$x_plus_y_logical)`.
+
+
+Next is to create a scatterplot of y vs x: color points using the logical variable 
+
+```{r color_logical_scatterplot}
+
+ggplot(random_sample_df, aes(x = x, y = y, color = x_plus_y_logical)) + geom_point() + ggtitle("Scatterplot of Two RVs from Standard Normal Distribution") + xlab("X") + ylab("Y") + labs(colour = "X + Y > 2")
+
+```
