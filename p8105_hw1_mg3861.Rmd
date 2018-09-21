@@ -2,8 +2,7 @@
 title: "Homework 1"
 author: "Margaret Gacheru"
 date: "September 21, 2018"
-output:
-  github_document: default
+output: html_document
 ---
 
 ```{r include = FALSE}
