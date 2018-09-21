@@ -41,3 +41,59 @@ mean(variable_types_df$vec_character)
 mean(variable_types_df$vec_factor)
 
 ```
+
+
+Next step is to explicitly convert variables from one type to another by applying the as.numeric function to the logical, character, and factor variables. Some observations made include:
+  
+1) It is not possible to convert a character vector into a numeric vector
+
+2) When converting a factor vector to a numeric vector, the function outputs the numeric codes that correspond to the factor levels. For example, when the above vector is originally created, the factor has 10 levels (which correspond to each unique name in the vector). So, when the factor is converted to numeric, the name "Aric" converts to 1 because it was the first factor level, "Carlos" converts to 2 since it was the second factor level, and so on. 
+
+```{r direct_convert_numeric, results = 'hide', warning = FALSE}
+
+convert_logical = as.numeric(variable_types_df$vec_logical)
+convert_character = as.numeric(variable_types_df$vec_character)
+convert_factor = as.numeric(variable_types_df$vec_factor)
+
+```
+
+
+When taking the mean of the directly converted vectors to numeric, some observations are made:
+  
+1. The mean of the converted logical to numeric vector is computed with no errors. The "True" and "False" are converted to 1 and 0, respectively therefore the mean of the new vector represents the proportion of elements that were greater than 2.
+
+2. It is not possible to compute the mean of the converted character to numeric vector. It is important to note that if the elements in the character vector were numerical values then conversion to a numerical vector and obtaining its mean would be possible. For example, if the character elements were "1", "2", "3", etc - corresponding to patients' IDs. The mean function would produce a numeric output but output is likely meaningless in the context of the variable.
+
+3. The mean of the converted factor vector is computed with no error. However, this mean is essentially meaningless. The numeric elements in the converted vector represents the specific factors level therefore the mean is meaningless in context of the original factor vector. 
+
+```{r mean_direct_numeric}
+
+mean(convert_logical)
+mean(convert_character)
+mean(convert_factor)
+
+```
+
+
+Convert the character variable from character to factor to numeric; similarly, convert the factor variable from factor to character to numeric. Some observations are made:
+
+1) Now, it is possible to convert a character vector to a numeric one if the character vector is first converted into a factor. Once it is a factor, the factor elements can be converted to numeric ones since each number corresponds to the unique character level. However, the numeric vector has no meaning in context of the original vector.
+
+2) Now, it is not possible to convert a factor vector to a numeric one, if the factor vector is first converted to a character one. 
+
+```{r indirect_convert_numeric, results = 'hide', warning = FALSE}
+
+character_factor_numeric = as.numeric(as.factor(variable_types_df$vec_character))
+factor_character_numeric = as.numeric(as.character(variable_types_df$vec_factor))
+
+```
+
+
+The mean of the converted character to factor to numeric vector is computed with no error (however, it is meaningless) and it is not possible to compute the mean of the converted factor to character to numeric vector.  
+
+```{r mean_indirect_numeric}
+
+mean(character_factor_numeric)
+mean(factor_character_numeric)
+
+```
