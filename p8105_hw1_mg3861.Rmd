@@ -97,3 +97,34 @@ mean(character_factor_numeric)
 mean(factor_character_numeric)
 
 ```
+
+
+##Problem 2
+
+First step is to create a data frame comprised of: 
+
+1. x: a random sample of size 1000 from a standard Normal distribution
+
+2. y: a random sample of size 1000 from a standard Normal distribution
+
+3. A logical vector indicating whether the x + y > 0
+
+4. A numeric vector created by coercing the above logical vector
+
+5. A factor vector created by coercing the above logical vector
+
+```{r create_normal_data_frame}
+set.seed(2)
+
+random_sample_df = tibble(
+x = rnorm(1000, mean = 0, sd = 1),
+y = rnorm(1000, mean = 0, sd = 1),
+x_plus_y_logical = as.logical(x + y > 0),
+x_plus_y_numeric = as.numeric(x_plus_y_logical),
+x_plus_y_factor = as.factor(x_plus_y_logical)
+)
+
+head(random_sample_df)
+```
+
+The data frame created above contains `r dim(random_sample_df)[1]` rows and `r dim(random_sample_df)[2]` columns. The random sample vector (x) has a  mean of `r mean(random_sample_df$x)` and a median of `r median(random_sample_df$x)` while the random sample vector (y) has a mean of `r mean(random_sample_df$y)` and median of `r mean(random_sample_df$y)`. Also, the proportion of the cases that have a summation of x and y that is greater than 0 is `r mean(random_sample_df$x_plus_y_logical)`.
