@@ -5,3 +5,39 @@ date: "September 21, 2018"
 output: html_document
 ---
 
+```{r include = FALSE}
+library(tidyverse)
+```
+
+
+##Problem 1
+
+
+First step is to create a data frame that contains a random sample of size 10 from a uniform[0, 5] distribution, a logical vector indicating whether elements of the sample are greater than 2, a length-10 character vector, and a length-10 factor vector
+
+```{r create_data_frame}
+set.seed(1)
+
+variable_types_df = tibble(
+  vec_uniform = runif(10, min = 0, max = 5),
+  vec_logical = as.logical(vec_uniform > 2),
+  vec_character = c("Red", "Green", "Blue", "Orange", "Yellow", "Violet", "Indigo", "Black", "White", "Gray"),
+  vec_factor = factor(c("Peter", "Noah", "Lance", "Matthew", "Daniel", "Chris", "Carlos", "Jonathan", "Aric", "Griffin"))
+)
+```
+
+
+When taking the mean of each variable in the dataframe, there are a couple of observations: 
+  
+1) The mean of the numeric and logical variables is computed. The mean function can accept numeric and logical vectors. When using the mean function, the factor vector is converted into a numeric vector of 0 (False) and 1 (True). Then it computes the mean of the 0's and 1's. In reality, the mean of the logical vector is the proportion of values greater than 2 (elements that are "True").
+
+2) The mean of the character and factor variables is not computed. The mean function does not accept character or factor vector since their elements non-numeric. 
+
+```{r mean_variables, warning = FALSE}
+
+mean(variable_types_df$vec_uniform)
+mean(variable_types_df$vec_logical)
+mean(variable_types_df$vec_character)
+mean(variable_types_df$vec_factor)
+
+```
