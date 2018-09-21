@@ -139,3 +139,36 @@ Next is to create a scatterplot of y vs x: color points using the logical variab
 ggplot(random_sample_df, aes(x = x, y = y, color = x_plus_y_logical)) + geom_point() + ggtitle("Scatterplot of Two RVs from Standard Normal Distribution") + xlab("X") + ylab("Y") + labs(colour = "X + Y > 2")
 
 ```
+
+
+Then, create a second scatterplot that color points using the numeric variable and comment on the color scales.
+```{r color_numeric_scatterplot}
+
+ggplot(random_sample_df, aes(x = x, y = y, color = x_plus_y_numeric)) + geom_point() + ggtitle("Color Point Using Numeric Variables") + xlab("X") + ylab("Y") + labs(colour = "X + Y > 2")
+```
+
+
+Create a third scatterplot that color points using the factor variable. 
+
+```{r color_factor_scatterplot}
+
+ggplot(random_sample_df, aes(x = x, y = y, color = x_plus_y_factor)) + geom_point() + ggtitle("Color Point Using Factor Variables") + xlab("X") + ylab("Y") + labs(colour = "X + Y > 2")
+
+```
+
+
+When comparing the color scales depending on the type of variable used, some observations are made:
+
+1. The color scale for numeric variables is a gradient of values ranging from 0 to 1. In this particular case, the only values of interest are 0 and 1 so the data points have the colors from the extreme end of the gradient.
+
+2. The color scale for factor variable is simply true or false - similar to the color scale for the logical variable. 
+
+
+Finally, export the first scatterplot to your project directory using ggsave.
+
+```{r fig.show = 'hide'}
+ggplot(random_sample_df, aes(x = x, y = y, color = x_plus_y_logical)) + geom_point() + ggtitle("Scatterplot of Two RVs from Standard Normal Distribution") + xlab("X") + ylab("Y") + labs(colour = "X + Y > 2")
+
+ggsave("logical_color_scatter_plot.pdf", height = 4, width = 6)
+
+```
